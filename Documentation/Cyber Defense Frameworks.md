@@ -3,6 +3,7 @@
   - [Pyramid of Pain](#pyramid-of-pain)
   - [Cyber Kill Chain](#cyber-kill-chain)
   - [Unified Kill Chain](#unified-kill-chain)
+  - [Diamond Model](#diamond-model)
 
 *See also:* [*The CIA Triad*](#Cia-Triad.md)
 ## Pyramid of Pain
@@ -263,3 +264,48 @@ For example, if the attack was financially motivated, they may seek to encrypt f
 
 *src: [Tryhackme](https://tryhackme.com/r/room/unifiedkillchain)*
 
+## Diamond Model
+
+The Diamond Model of Intrusion Analysis, formulated by Sergio Caltagirone, Andrew Pendergast, and Christopher Betz in 2013, consists of four primary elements:
+1. [Adversary](#adversary)
+2. [Infrastructure](#infrastructure)
+3. [Capability](#capability)
+4. [Victim](#victim)
+
+ Alongside these core features, the model also incorporates the dimensions of Social, Political, and Technology axes, contributing further depth and context to intrusion analysis and understanding. This model derives its name from the configuration of these core elements, structured to form a diamond shape that signifies the interconnectedness of the components. 
+ 
+ The Diamond Model carries the essential concepts of intrusion analysis and adversary operations while allowing the flexibility to expand and encompass new ideas and concepts. The model provides various opportunities to integrate intelligence in real-time for network defence, automating correlation across events, classifying events with confidence into adversary campaigns, and forecasting adversary operations while planning and gaming mitigation strategies.
+
+### Adversary
+
+The attacker, enemy, cyber threat actor, or hacker. The adversary is the person who stands behind the cyberattack.
+
+There are 2 types:
+
+**Adversary Operator** is the “hacker” or person(s) conducting the intrusion activity.
+
+**Adversary Customer** is the entity that stands to benefit from the activity conducted in the intrusion. It may be the same person who stands behind the adversary operator, or it may be a separate person or group.
+
+### Infrastructure
+
+Infrastructure is the physical or logical interconnections that the adversary uses to deliver a capability or maintain control of capabilities. For example, a command and control centre (C2) and the results from the victim (data exfiltration). 
+
+The infrastructure can also be IP addresses, domain names, email addresses, or even a malicious USB device found in the street that is being plugged into a workstation. 
+
+Type 1 Infrastructure is the infrastructure controlled or owned by the adversary. 
+
+Type 2 Infrastructure is the infrastructure controlled by an intermediary. Sometimes the intermediary might or might not be aware of it. This is the infrastructure that a victim will see as the adversary. Type 2 Infrastructure has the purpose of obfuscating the source and attribution of the activity. Type 2 Infrastructure includes malware staging servers, malicious domain names, compromised email accounts, etc.
+
+Service Providers are organizations that provide services considered critical for the adversary availability of Type 1 and Type 2 Infrastructures, for example, Internet Service Providers, domain registrars, and webmail providers.
+
+### Capability
+
+Capability – is also known as the skill, tools, and techniques used by the adversary in the event. The capability highlights the adversary’s tactics, techniques, and procedures (TTPs). 
+
+### Victim
+
+The target of the adversary. A victim can be an organization, person, target email address, IP address, domain, etc. It's essential to understand the difference between the victim persona and the victim assets because they serve different analytic functions. 
+
+**Victim Personae** are the people and organizations being targeted and whose assets are being attacked and exploited. These can be organization names, people’s names, industries, job roles, interests, etc.
+
+**Victim Assets** are the attack surface and include the set of systems, networks, email addresses, hosts, IP addresses, social networking accounts, etc., to which the adversary will direct their capabilities.

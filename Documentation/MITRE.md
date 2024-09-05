@@ -49,7 +49,11 @@ Understand the outcomes of the operational actions (output)
 [ENGAGE Matrix Explorer](https://engage.mitre.org/matrix)
 
 ## D3FEND
+[D3FEND](https://d3fend.mitre.org/) stands for Detection, Denial, and Disruption Framework Empowering Network Defense and acts as a knowledge graph of cybersecurity countermeasures.
 
-A knowledge graph of cybersecurity countermeasures.
+![alt text](imG/defend.png)
 
 ## ATT&CK Emulation Plans
+Under MITRE ENGENUITY, there exist CTID, the Adversary Emulation Library, and ATT&CK® Emulation Plans. 
+
+MITRE formed an organization named The Center of Threat-Informed Defense (CTID). This organization consists of various companies and vendors from around the globe. Their objective is to conduct research on cyber threats and their TTPs and share this research to improve cyber defense for all. 

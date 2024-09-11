@@ -1,16 +1,18 @@
 # Yara
 
-- [Yara](#yara)
-  - [Getting Started](#getting-started)
-  - [More Conditions](#more-conditions)
-    - [Logic Gates](#logic-gates)
-  - [Integration with other Frameworks](#integration-with-other-frameworks)
-    - [Cuckoo](#cuckoo)
-    - [Python](#python)
-    - [LOKI](#loki)
-    - [THOR](#thor)
-    - [FENRIR](#fenrir)
-    - [YAYA](#yaya)
+
+- [Getting Started](#getting-started)
+- [More Conditions](#more-conditions)
+  - [Logic Gates](#logic-gates)
+- [Integration with other Frameworks](#integration-with-other-frameworks)
+  - [Cuckoo](#cuckoo)
+  - [Python](#python)
+  - [LOKI](#loki)
+  - [THOR](#thor)
+  - [FENRIR](#fenrir)
+  - [YAYA](#yaya)
+- [Creating Yara Rules with yarGen](#creating-yara-rules-with-yargen)
+- [Valhalla](#valhalla)
 
 The proprietary language that [Yara (Yet Another Rediculous Acronym)](https://yara.readthedocs.io/en/latest/) uses for rules is fairly trivial to pick up, but hard to master. This is because your rule is only as effective as your understanding of the patterns you want to search for.
 
@@ -30,6 +32,9 @@ yara myrule.yar somedirectory
 To make a rule that finds all lowercase, uppercase and camelcase versions of the string "Hello World!" create a new yara file and add the following rule:
 ```js
 rule helloworld_checker {
+    meta:
+        description = "A simple rule that checks occurrences of the string 'Hello World!'."
+    
     strings: 
         $hello_world = "Hello World!"
         $hello_world_lowercase = "hello world!"
@@ -126,7 +131,13 @@ Based on the GitHub page, detection is based on 4 methods:
 
 There are additional checks that LOKI can be used for which can be found in the [readme](https://github.com/Neo23x0/Loki/blob/master/README.md).
 
-LOKI can be [downloaded](https://github.com/Neo23x0/Loki/releases) and used on both Windows and Linux systems.
+To run perform a scan with Loki, navigate to the directory you want to scan and run:
+```bash
+python <path/to/your/Loki/dir/loki.py> -p .\
+```
+
+
+LOKI can be [downloaded](https://github.com/Neo23x0/Loki/releases) and used on both Windows and Linux systems. 
 
 ### THOR
 THOR Lite is Florian's newest multi-platform IOC AND YARA scanner. There are precompiled versions for Windows, Linux, and macOS. A nice feature with THOR Lite is its scan throttling to limit exhausting CPU resources. 
@@ -140,3 +151,39 @@ For more information and/or to download the binary, [start here](https://www.nex
 ### YAYA
 
 [YAYA](https://github.com/EFForg/yaya) (Yet Another Yara Automation) was created by the EFF (Electronic Frontier Foundation) and released in September 2020. Based on their website, "YAYA is a new open-source tool to help researchers manage multiple YARA rule repositories. YAYA starts by importing a set of high-quality YARA rules and then lets researchers add their own rules, disable specific rulesets, and run scans of files."
+
+## Creating YARA Rules with yarGen
+
+[yarGen](https://github.com/Neo23x0/yarGen) is a generator for YARA rules
+
+*The main principle is the creation of yara rules from strings found in malware files while removing all strings that also appear in goodware files. Therefore yarGen includes a big goodware strings and opcode database as ZIP archives that have to be extracted before the first use.*
+
+Example command:
+```bash
+python3 yarGen.py -m /path/you/want/to/generate/rules/for --excludegood -o /output/path/file2.yar 
+```
+`-m` is the path to the files you want to generate rules for
+
+`--excludegood` force to exclude all goodware strings (these are strings found in legitimate software and can increase false positives)
+
+`-o` location & name you want to output the Yara rule
+
+This should generate the following output:
+```bash
+[=] Generated 1 SIMPLE rules.
+[=] All rules written to /output/path/file2.yar 
+[+] yarGen run finished
+```
+
+Further Reading on creating Yara rules and using yarGen and yarAnalyzer (Another tool that can be used in combination with yarGen):
+
+- [yarAnalyzer](https://github.com/Neo23x0/yarAnalyzer/)
+- [Write Simple Sound Yara Rules](https://www.bsk-consulting.de/2015/02/16/write-simple-sound-yara-rules/)
+- [Write Simple Sound Yara Rules Part 2](https://www.bsk-consulting.de/2015/10/17/how-to-write-simple-but-sound-yara-rules-part-2/)
+- [Write Simple Sound Yara Rules Part 3](https://www.bsk-consulting.de/2016/04/15/how-to-write-simple-but-sound-yara-rules-part-3/)
+
+
+
+## Valhalla
+
+*[Valhalla](https://valhalla.nextron-systems.com/) boosts your detection capabilities with the power of thousands of hand-crafted high-quality YARA rules.*

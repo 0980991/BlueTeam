@@ -131,6 +131,17 @@ Baseband vs Broadband
 | OSPF     | 110                     |
 | RIP      | 120                     |
 
+
+## Netstat parameters
+| Command     | Purpose                                                                                                                                      |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| netstat -a  | Displays all connections and listening ports, including both active and inactive ones .                                                      |
+| netstat -c  | Continuously print the selected network statistics at regular intervals. This option is useful for monitoring network activity in real-time. |
+| netstat -e  | Displays Ethernet statistics.                                                                                                                |
+| netstat -n  | Displays addresses and port numbers in numerical form instead of using friendly names.                                                       |
+| netstat -r  | Displays the contents of the routing table.                                                                                                  |
+| netstat -s  | Displays statistics categorized by protocol.                                                                                                 |
+
 # Hoofdstuk 2:
 - Ethernet
 - xBASE-Y (e.g 10Base-T = Unshielded twisted paar)

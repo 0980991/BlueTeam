@@ -47,6 +47,10 @@ Presentation:
 Application layer
 - SMTP, ftp, DNS
 
+The access point is responsible for communicating with the supplicant and sending information to the authenticating server. This device is called the authenticator. The end device that sends credentials is called the supplicant. The supplicant is a piece of software in the operating system that supplies the credentials for AAA authentication. The AAA server is normally a RADIUS server or TACACS+ server that is configured for 802.1X.
+
+// ADD 1X
+
 ## Table of 802 some standards
 | Name   | Description                                                                                                                                                                                                                                                           | Related Tags                          |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
@@ -56,6 +60,7 @@ Application layer
 | 802.1d | Remote MAC bridging across LAN                                                                                                                                                                                                                                        |                                       |
 | 802.1g | Remote Mac Bridging across non-LAN in accordance with Spanning Tree                                                                                                                                                                                                   | MAC, STP, Bridge                      |
 | 802.1Q | Specification for VLANs and VLAN bridges                                                                                                                                                                                                                              | (Native) Trunk, VLAN, VLAN Bridge     |
+| 802.1X | Specification for Port Based Access Control (PNAC)                                                                                                                                                                                                                    | PNAC     |
 | 802.2  | Defines Logical Link Control (LLC, aka the upper part of layer 2) which handles primarily the (de)multiplexing of signals                                                                                                                                             | Multiplexing, LLC, MAC, Layer 2       |
 | 802.3  | Defines the physical and data-link's layer Media Access Control of wired Ethernet.                                                                                                                                                                                    | Ethernet, CSMA/CD                     |
 | 802.4  | Defines a Token Bus; a standard for deploying token rings on LAN over a virtual ring which decreases collisions                                                                                                                                                       | Token Bus, Physical Bus, Logical Ring |
@@ -66,7 +71,16 @@ Application layer
 | 802.9  | IsoEthernet combines 10 megabits per second Ethernet and 96 64Kbs ISDN B channels. It was originally developed to provide data and voice/video over the same wire without degradation by fixing the amount of bandwidth assigned to the Ethernet and B-channel sides. | IsoEthernet, voice/video              |
 | 802.10 | A former standard that defined security functions such as security association management and key management, as well as access control, data confidentiality and data integrity.                                                                                     |                                       |
 | 802.11 | A LAN standard that specifies layer 1 & 2 protocols for implementing Wireless Local Access Network (WLAN) communications.                                                                                                                                             | Wi-Fi, WLAN,                          |
+| 802.11a | 5GHz by using Dynamic Frequency Selection to avoid interference with things like radar. It also uses orthogonal frequency division multiplexing to allow multiple channels to stream at the same frequency                                                           | Wi-Fi, WLAN, DFS, OFDM                |
+| 802.11b | 2.4GHz by using Direct Sequence Spread Spectrum                                                                                                                                                                                                                      | Wi-Fi, DSSS,                          |
+| 802.11g | 5Ghz  also uses OFDM                                                                                                                                                                                                                                                 | Wi-Fi, WLAN, OFDM                     |
+| 802.11g | ?Ghz an incorporates the Temporal Key Integrity Protocol (TKIP)                                                                                                                                                                                                      | Wi-Fi, TKIP                           |
+| 802.11n |  Wifi 4 at 2,4/5Ghz of speed 72-600Mbs uses Multiple Input Multiple Output                                                                                                                                                                                           | Wi-Fi 4, MIMO                         |
+| 802.11ac | Wifi 5 at 2,4/5Ghz of speed 433-6933Mbs                                                                                                                                                                                                                             | Wi-Fi 5                               |
+| 802.11ax | Wifi 6 & 6E at 2,4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi 6, Wifi-6E                      |
+| 802.11be | Wifi 6 & 6E at 2,4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi, WLAN                           |
 | 802.12 | 100BaseVG (Voice Grade) is a 100 Mbs Ethernet standard specified to run over four pairs of Category 3 cable. It was made it's own standard to meet the need of being long distance.                                                                                   |                                       |
+
 
 
 ## Table of Application Layer Protocols
@@ -115,13 +129,16 @@ Application layer
 
 Baseband vs Broadband
 
-| Protocol                                               | Abbr.     | Cable Type         | Description                                                                                                                                                                                                                                                                                                                                                                                                                     |
-|--------------------------------------------------------|-----------|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Ethernet over Twisted Pair                             | 10BaseT   | UTP                | 10Mbit Baseband Twisted pair cable (Unshielded TP)                                                                                                                                                                                                                                                                                                                                                                              |
-| Thin Ethernet (Ethernet over COAX)                     | 10Base2   | Thin Coax          | 10Mbit Baseband over Coax with a max cable length of 200m                                                                                                                                                                                                                                                                                                                                                                       |
-| Thicc Ethernet                                         | 10Base5   | Thick Coax         | 10Mbit Baseband over thick coax with a max cable length of 500m                                                                                                                                                                                                                                                                                                                                                                 |
-| Ethernet over 2 pairs of cat5 UTP                      | 10BaseTX  | UTP                | 10Mbit Baseband over unshielded twisted pair                                                                                                                                                                                                                                                                                                                                                                                    |
-| Ethernet over Optical Fibre                            | 100BaseFX | Fibre Optics       | 100Mbit Baseband over fibre optics                                                                                                                                                                                                                                                                                                                                                                                              |
+| Protocol                                               | Abbr.     | Cable Type         | Description                                                                      |
+|--------------------------------------------------------|-----------|--------------------|----------------------------------------------------------------------------------|
+| Ethernet over Twisted Pair                             | 10BaseT   | UTP                | 10Mbit Baseband Twisted pair cable (Unshielded TP)                               |
+| Thin Ethernet (Ethernet over COAX)                     | 10Base2   | Thin Coax          | 10Mbit Baseband over Coax with a max cable length of 200m                        |
+| Thicc Ethernet                                         | 10Base5   | Thick Coax         | 10Mbit Baseband over thick coax with a max cable length of 500m                  |
+| Ethernet over 2 pairs of cat5 UTP                      | 10BaseTX  | UTP                | 10Mbit Baseband over unshielded twisted pair                                     |
+| Ethernet over Optical Fibre                            | 100BaseFX | Fibre Optics       | 100Mbit Baseband over fibre optics                                               |
+| Ethernet over Optical Fibre                            | 100BaseSX | Fibre Optics       | 100Mbit Baseband over fibre optics                                               |
+| Ethernet over Optical Fibre                            | 100BaseFX | Fibre Optics       | 100Mbit Baseband over fibre optics                                               |
+
 
 ## Routing Protocols Administrative Distance Table
 | Protocol | Administrative Distance |
@@ -354,7 +371,7 @@ Host record types:
   - Pointer Records
   - TXT
   - Service SRV
-  - Pointer PR
+  - Pointer PTR
   - DNS NS
   - +1
 

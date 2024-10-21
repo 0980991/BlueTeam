@@ -3,6 +3,8 @@ The network topology is t
 - POint-to-Point
 - Een hub gebruikt een logische STAR-topology en physieke bus
 - Mesh (n*(n-1)/2) waar n d ehoeveelheid nodes zijn
+
+- An ad-hoc network is (a typically) wireless network that is created when there is a sudden need for a LAN in which each computer directly connects to eachother without a central hub.
   
 
 TCP/IP (DOD) model vs OSI model
@@ -49,7 +51,18 @@ Application layer
 
 The access point is responsible for communicating with the supplicant and sending information to the authenticating server. This device is called the authenticator. The end device that sends credentials is called the supplicant. The supplicant is a piece of software in the operating system that supplies the credentials for AAA authentication. The AAA server is normally a RADIUS server or TACACS+ server that is configured for 802.1X.
 
-// ADD 1X
+
+## Router Commands:
+The **show etherchannel summary** command provides a summary of the EtherChannel (link aggregation group) status, including the status of individual member ports. This command is specifically designed to diagnose issues related to EtherChannels, such as suspended ports, by showing whether ports are properly aggregated and if there are any negotiation issues.
+
+The **show interface status** command provides a general status overview of all interfaces, including their VLAN, duplex, and speed settings, but does not provide detailed information about EtherChannel configurations or why a port might be suspended within an EtherChannel.
+
+The **show running-config** command displays the current configuration of the switch, which includes EtherChannel configuration but does not provide real-time status information about the EtherChannel or its member ports.
+
+The **show protocols command** displays the status of network protocols configured on the switch, not detailed information about EtherChannel configurations or the status of its member ports.
+
+
+
 
 ## Table of 802 some standards
 | Name   | Description                                                                                                                                                                                                                                                           | Related Tags                          |
@@ -75,10 +88,10 @@ The access point is responsible for communicating with the supplicant and sendin
 | 802.11b | 2.4GHz by using Direct Sequence Spread Spectrum                                                                                                                                                                                                                      | Wi-Fi, DSSS,                          |
 | 802.11g | 5Ghz  also uses OFDM                                                                                                                                                                                                                                                 | Wi-Fi, WLAN, OFDM                     |
 | 802.11g | ?Ghz an incorporates the Temporal Key Integrity Protocol (TKIP)                                                                                                                                                                                                      | Wi-Fi, TKIP                           |
-| 802.11n |  Wifi 4 at 2,4/5Ghz of speed 72-600Mbs uses Multiple Input Multiple Output                                                                                                                                                                                           | Wi-Fi 4, MIMO                         |
-| 802.11ac | Wifi 5 at 2,4/5Ghz of speed 433-6933Mbs                                                                                                                                                                                                                             | Wi-Fi 5                               |
-| 802.11ax | Wifi 6 & 6E at 2,4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi 6, Wifi-6E                      |
-| 802.11be | Wifi 6 & 6E at 2,4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi, WLAN                           |
+| 802.11n |  Wifi 4 at 2.4/5Ghz of speed 72-600Mbs uses Multiple Input Multiple Output                                                                                                                                                                                           | Wi-Fi 4, MIMO                         |
+| 802.11ac | Wifi 5 at 2.4/5Ghz of speed 433-6933Mbs                                                                                                                                                                                                                             | Wi-Fi 5                               |
+| 802.11ax | Wifi 6 & 6E at 2.4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi 6, Wifi-6E                      |
+| 802.11be | Wifi 6 & 6E at 2.4/5/6Ghz of speed 574-9608                                                                                                                                                                                                                         | Wi-Fi, WLAN                           |
 | 802.12 | 100BaseVG (Voice Grade) is a 100 Mbs Ethernet standard specified to run over four pairs of Category 3 cable. It was made it's own standard to meet the need of being long distance.                                                                                   |                                       |
 
 
@@ -124,7 +137,7 @@ The access point is responsible for communicating with the supplicant and sendin
 | Session Initiation Protocol                    | SIP    | TCP, UPD: 5060/TCP: 5061 | TCP/UDP    | Application                  | Used to construct and deconstruct multimedia communication sessions such as audio/video calls. It works in conjunction with RTP.                                                                                                                                                                                                                                        |
 
 
-                                                                                                                                                                                       |
+                                                                                                                                                                                       
 ## Ethernet
 
 Baseband vs Broadband
@@ -150,14 +163,32 @@ Baseband vs Broadband
 
 
 ## Netstat parameters
+Netstat is a command-line utility used to display active Internet connections, routing tables, and protocol statistics.
 | Command     | Purpose                                                                                                                                      |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| netstat -a  | Displays all connections and listening ports, including both active and inactive ones .                                                      |
-| netstat -c  | Continuously print the selected network statistics at regular intervals. This option is useful for monitoring network activity in real-time. |
-| netstat -e  | Displays Ethernet statistics.                                                                                                                |
-| netstat -n  | Displays addresses and port numbers in numerical form instead of using friendly names.                                                       |
-| netstat -r  | Displays the contents of the routing table.                                                                                                  |
-| netstat -s  | Displays statistics categorized by protocol.                                                                                                 |
+| netstat -a  | Displays **All** connections and listening ports, including both active and inactive ones .                                                      |
+| netstat -c  | **Continuously** print the selected network statistics at regular intervals. This option is useful for monitoring network activity in real-time. |
+| netstat -e  | Displays **Ethernet** statistics.                                                                                                                |
+| netstat -n  | Displays addresses and port numbers in **Numerical** form instead of using friendly names (FQDN).                                                       |
+| netstat -r  | Displays the contents of the **Routing** **table.                                                                                                  |
+| netstat -s  | Displays **Statistics** categorized by protocol.                                                                                                 |
+| netstat -l  | **Lists running sockets** on your system                                                                                                     |
+
+
+
+## Arp Parameters
+| Command Windows                   | Purpose                                                                                                           |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| arp -a (or -g)                    | View local arp table. New Hosts (on the network) can be added to this table simply by pinging the ip of the host. |
+| arp -s <IP_address> <MAC_address> | Add a static Arp entry.                                                                                           |
+| arp -d <IP_address>               | Displays Ethernet statistics.                                                                                     |
+
+
+## Netflow
+Netflow is a Cisco router feature that allows users to capture IP network traffic as it enters or exits an interface.
+
+
+
 
 # Hoofdstuk 2:
 - Ethernet
@@ -669,19 +700,27 @@ Industrial Embeddeds systems in IoT
   - ICS
   - Supervisory Control & Data Acquisition (SCADA)
 
-## Wireless Networking Standards
+## Wireless Networks
+### Wireless Networking Standards
 
-| Name     | Band        | Max Speed    |
-|----------|-------------|--------------|
-| 802.11a  | 5GHz        | 54 Mbps      |
-| 802.11b  | 2.4GHz      | 11 Mbps      |
-| 802.11g  | 2.4GHz      | 54 Mbps      |
-| 802.11n  | 2.5GHz/5GHz | 600 Mbps     |
-| 802.11ac | 5GHz        | Several Gbps |
-| 802.11ax | 2.5GHz/5GHz | 9.6 Gbps     |
+| Name     | Band        | Max Speed    | Bandwith                  |
+|----------|-------------|--------------|---------------------------|
+| 802.11a  | 5GHz        | 54 Mbps      | 20MHz                     |
+| 802.11b  | 2.4GHz      | 11 Mbps      | 22MHz                     |
+| 802.11g  | 2.4GHz      | 54 Mbps      | 20MHz                     |
+| 802.11n  | 2.5GHz/5GHz | 600 Mbps     | 20, 40, 80MHz             |
+| 802.11ac | 5GHz        | Several Gbps | 20, 40, 80, 80+80, 160Mhz |
+| 802.11ax | 2.5GHz/5GHz | 9.6 Gbps     | 20, 40, 80, 80+80, 160Mhz |
 
+*The 80MHz + 80MHz is an indicator of **channel bonding**, which increases bandwith but at a risk of increased interference due to the increase in use of overlapping channels.*
 
-Multiuser MIMO
+### Multiple Input Multiple Output (MIMO)
+MIMO is a set of techniques used to reduce the degradation of wireless signals due to waves possibly reflecting and stretching (doppler) before arriving at the user's device.
+
+Benefits are:
+- Improved Throughput
+- Coverage
+- Reliability
 
 Bandsteering
 
@@ -689,6 +728,7 @@ Satelite internet  technologies
   - Microwave satellite Broadband
   - Geostationary Orbital satellites 
   - Low earth orbital
+
 
 Wireless Local Area (WLAN)
 
